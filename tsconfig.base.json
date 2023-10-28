@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@coinbridge/account": ["libs/services/account/src/index.ts"],
+      "@coinbridge/comms": ["libs/services/comms/src/index.ts"],
+      "@coinbridge/transaction": ["libs/models/transaction/src/index.ts"],
+      "@coinbridge/user": ["libs/models/user/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

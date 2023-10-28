@@ -1,0 +1,64 @@
+{
+  "name": "coinbridge-ussd",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/coinbridge-ussd/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/coinbridge-ussd",
+        "main": "apps/coinbridge-ussd/src/main.ts",
+        "tsConfig": "apps/coinbridge-ussd/tsconfig.app.json",
+        "assets": ["apps/coinbridge-ussd/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/coinbridge-ussd/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "coinbridge-ussd:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "coinbridge-ussd:build:development"
+        },
+        "production": {
+          "buildTarget": "coinbridge-ussd:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/coinbridge-ussd/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/coinbridge-ussd/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

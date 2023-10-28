@@ -1,0 +1,33 @@
+{
+  "name": "coinbridge-web-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/coinbridge-web-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/coinbridge-web-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "coinbridge-web:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "coinbridge-web:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "coinbridge-web:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/coinbridge-web-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "implicitDependencies": ["coinbridge-web"],
+  "tags": []
+}
