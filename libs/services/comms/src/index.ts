@@ -1,1 +1,1 @@
-export * from './lib/comms';
+export * from './lib/sendSms';

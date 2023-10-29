@@ -41,3 +41,4 @@ Thumbs.db
 .nx/cache
 
 apps/coinbridge-web/src/environments
+.env

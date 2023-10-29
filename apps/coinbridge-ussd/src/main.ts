@@ -1,21 +1,13 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import express from 'express';
-import * as path from 'path';
+import { json, urlencoded } from 'body-parser'
+const ussdRoute = require("./index");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.listen(PORT, () => console.log(`running on localhost:${PORT}`));
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to coinbridge-ussd!' });
-});
+app.use(json());
+app.use(urlencoded({ extended: false }));
 
-const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
+app.use("/", ussdRoute);
