@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@coinbridge/account": ["libs/services/account/src/index.ts"],
+      "@coinbridge/auth": ["libs/services/auth/src/index.ts"],
       "@coinbridge/comms": ["libs/services/comms/src/index.ts"],
       "@coinbridge/transaction": ["libs/models/transaction/src/index.ts"],
       "@coinbridge/transactions": ["libs/services/transactions/src/index.ts"],

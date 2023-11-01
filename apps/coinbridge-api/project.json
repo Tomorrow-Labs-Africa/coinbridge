@@ -1,0 +1,50 @@
+{
+  "name": "coinbridge-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/coinbridge-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/coinbridge-api",
+        "main": "apps/coinbridge-api/src/main.ts",
+        "tsConfig": "apps/coinbridge-api/tsconfig.app.json",
+        "assets": ["apps/coinbridge-api/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/coinbridge-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "coinbridge-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "coinbridge-api:build:development"
+        },
+        "production": {
+          "buildTarget": "coinbridge-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/coinbridge-api/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import { sendSms } from "@coinbridge/comms";
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 /**

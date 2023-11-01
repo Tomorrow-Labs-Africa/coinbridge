@@ -1,9 +1,9 @@
 import * as crypto from 'crypto';
 import * as utf8 from 'utf8';
 import axios from 'axios';
-import moment from 'moment';
+import * as moment from 'moment';
 
-import dotenv from 'dotenv';
+import dotenv = require('dotenv');
 dotenv.config();
 
 const SERVER_URL = `${process.env.FONBNK_BASE_URL}`;
@@ -49,7 +49,7 @@ export async function airtimeTopUp(phone: string, amount: number, carrier?: stri
     strategy: strategy ?? "best_price", //optional
   }
 
-  let timestamp = moment().valueOf().toString();
+  let timestamp = moment.valueOf().toString();
   console.log("Timestamp: "+ timestamp);
 
   let signature = generateSignature({
