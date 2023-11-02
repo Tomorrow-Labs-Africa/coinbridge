@@ -9,13 +9,14 @@ const PUBLISHABLE_KEY = process.env.INTASEND_PUBLISHABLE_KEY;
 const intasend = new IntaSend(
   PUBLISHABLE_KEY,
   TOKEN,
-  true,
+  false,
 );
 
 
 
 export const sendMobileMoney = async (phoneNumber: string, name: string, amount: number, narrative: string) => {
   try {
+    // Step 1: Initiate M-Pesa B2C
     const response = await intasend.payouts().mpesa({
       currency: 'KES',
       transactions: [{
@@ -24,6 +25,14 @@ export const sendMobileMoney = async (phoneNumber: string, name: string, amount:
         amount: amount.toString(),
         narrative,
       }],
+    });
+
+    //step 2: Approve and release payment
+    intasend.payouts().approve(response, false).then((res) => {
+      console.log(res);
+      console.log("Payout approved");
+    }).catch((err) => {
+      console.log(err);
     });
     console.log(`Mobile money payout sent to ${name} (${phoneNumber}) for ${amount} KES with narrative "${narrative}"`);
     console.log(`Payouts response:`, response);
