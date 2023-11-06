@@ -9,5 +9,7 @@ import isAuthenticatedMiddleware from '../middlewares/is-authenticated.middlewar
 router.post('/sendMobileMoney',[isAuthenticatedMiddleware], TransactionController.sendMobileMoney);
 router.post('/requestMobileMoney',[isAuthenticatedMiddleware], TransactionController.requestMpesaPayment);
 router.post('/buyAirtime',[isAuthenticatedMiddleware], TransactionController.buyAirtime);
+router.post('/sendToMpesaPaybill',[isAuthenticatedMiddleware], TransactionController.sendToMpesaPaybill);
+router.post('/sendToMpesaTillNumber',[isAuthenticatedMiddleware], TransactionController.sendToMpesaTillNumber);
 
 export default router;
