@@ -18,14 +18,15 @@ export const sendToken = async(
   )=>{
     try {
       let rpcUrl = `${process.env.NODE_URL}`
-      const providerInstance = new ethers.JsonRpcProvider(rpcUrl);
+
+      const providerInstance = new ethers.providers.JsonRpcProvider(rpcUrl);
       const wallet = new ethers.Wallet(privateKey, providerInstance);
       const gasPrice  = await (await providerInstance.getFeeData()).gasPrice;
       const nonce = await providerInstance.getTransactionCount(wallet.getAddress());
 
       const result = await wallet.sendTransaction({
           to: receiverAddress,
-          value: ethers.parseEther(amount.toString()),
+          value: ethers.utils.parseEther(amount.toString()),
           gasPrice:  gasPrice,
           nonce: nonce,
       })

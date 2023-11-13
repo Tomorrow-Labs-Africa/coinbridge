@@ -10,7 +10,12 @@ export class MobileMoneyService {
    * @param amount amount to be sent
    * @param service mobile money service provider to use for sending - Defaults to INTASEND
    */
-  public static sendMobileMoney(phoneNumber: string, name: string, amount: number, service: string = DEFAULT_PROVIDER): void {
+  public static sendMobileMoney(
+    phoneNumber: string,
+    name: string,
+    amount: number,
+    service: string = DEFAULT_PROVIDER): void {
+      
     console.log(`Sending ${amount} to ${name} (${phoneNumber}) via ${service}`);
     switch (service) {
       case 'INTASEND':
