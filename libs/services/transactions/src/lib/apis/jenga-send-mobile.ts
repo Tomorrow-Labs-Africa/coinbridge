@@ -121,7 +121,7 @@ export const sendFromJengaToMobileMoney = async (
 					currencyCode: currencyCode,
 					reference: referenceCode,
 					date: date,
-					description: 'Cash From CoinBridge via Jenga',
+					description: 'Cash From TLA via Jenga',
 				},
 			},
 		});
