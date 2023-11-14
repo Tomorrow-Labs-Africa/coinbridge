@@ -32,14 +32,15 @@ export class PaymentService {
    * @param businessName name of the beneficiary business
    * @param amount amount to be sent in KES
    * @param paybillNumber paybill number of the beneficiary business
+   * @param accountNumber account number/reference of the beneficiary business
    * @param service payment service provider to use for sending - Defaults to INTASEND
    */
-  public static async payBill(businessName: string, amount: number, paybillNumber: string, narrative:string = "Coinbridge paybill" ,service: string = DEFAULT_PROVIDER): Promise<void> {
+  public static async payBill(businessName: string, amount: number, paybillNumber: string, accountNumber: string, narrative:string = "Coinbridge paybill" ,service: string = DEFAULT_PROVIDER): Promise<void> {
     console.log(`Sending ${amount} to ${businessName} (${amount}) via ${service}`);
     let request: any;
     switch (service) {
       case 'INTASEND':
-        request = await sendToMpesaPaybill(businessName, amount, paybillNumber, narrative);
+        request = await sendToMpesaPaybill(businessName, amount, paybillNumber, accountNumber, narrative);
         break;
       default:
         throw new Error(`Unsupported mobile money service: ${service}`);

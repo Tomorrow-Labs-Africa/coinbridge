@@ -14,14 +14,14 @@ export class MobileMoneyService {
     console.log(`Sending ${amount} to ${name} (${phoneNumber}) via ${service}`);
     switch (service) {
       case 'INTASEND':
-        sendMobileMoney(phoneNumber, name, amount, 'Coinbridge payout');
+        sendMobileMoney(phoneNumber, name, amount, 'TLA payout');
         break;
       default:
         throw new Error(`Unsupported mobile money service: ${service}`);
     }
 
     //TODO: Save transaction to DB
-    
+
 
   }
 

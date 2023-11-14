@@ -1,4 +1,4 @@
-import IntaSend = require('intasend-node');
+import IntaSend from 'intasend-node';
 import * as dotenv from 'dotenv';
 import { generateReferenceCode } from '@coinbridge/utils';
 import { Transaction, TransactionTypes, TransactionStatus } from '@coinbridge/transaction';
@@ -11,7 +11,7 @@ const PUBLISHABLE_KEY = process.env.INTASEND_PUBLISHABLE_KEY;
 const intasend = new IntaSend(
   PUBLISHABLE_KEY,
   TOKEN,
-  true,
+  false,
 );
 
 
@@ -83,7 +83,7 @@ export const requestMpesaPayment = async (firstName: string, lastName: string, e
     }
 }
 
-export const sendToMpesaPaybill = async (businessName:string, amount: number, paybillNumber: string, narrative: string) => {
+export const sendToMpesaPaybill = async (businessName:string, amount: number, paybillNumber: string, accountNumber: string, narrative: string) => {
   try{
       const response = await intasend.payouts().mpesaB2B({currency: 'KES',
       transactions: [
@@ -91,7 +91,7 @@ export const sendToMpesaPaybill = async (businessName:string, amount: number, pa
           name: businessName,
           account: paybillNumber,
           account_type: 'PayBill',
-          account_reference: generateReferenceCode(),
+          account_reference: accountNumber,
           amount: amount,
           narrative: narrative ?? 'Purchase'
         }
