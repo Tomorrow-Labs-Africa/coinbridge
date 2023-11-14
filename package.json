@@ -5,7 +5,8 @@
   "scripts": {
     "start-ussd": "npx nx run coinbridge-ussd:serve",
     "start-web": "npx nx run coinbridge-web:serve",
-    "start-api": "npx nx run coinbridge-api:serve"
+    "start-api": "npx nx run coinbridge-api:serve",
+    "build-web": "npx nx run coinbridge-web:build"
   },
   "private": true,
   "dependencies": {
