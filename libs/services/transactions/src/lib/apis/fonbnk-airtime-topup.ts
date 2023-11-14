@@ -3,7 +3,7 @@ import * as utf8 from 'utf8';
 import axios from 'axios';
 import * as moment from 'moment';
 
-import dotenv = require('dotenv');
+import * as dotenv from 'dotenv';
 import { Transaction, TransactionTypes } from '@coinbridge/transaction';
 dotenv.config();
 

@@ -27,7 +27,7 @@ export const sendToken = async(
       const result = await wallet.sendTransaction({
           to: receiverAddress,
           value: ethers.utils.parseEther(amount.toString()),
-          gasPrice:  gasPrice,
+          gasPrice:  gasPrice!,
           nonce: nonce,
       })
 

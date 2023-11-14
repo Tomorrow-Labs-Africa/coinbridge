@@ -1,10 +1,10 @@
-import IntaSend from 'intasend-node';
 import * as dotenv from 'dotenv';
 import { generateReferenceCode } from '@coinbridge/utils';
 import { Transaction, TransactionTypes, TransactionStatus } from '@coinbridge/transaction';
 
 dotenv.config();
 
+const IntaSend = require('intasend-node');
 const TOKEN = process.env.INTASEND_SECRET_TOKEN;
 const PUBLISHABLE_KEY = process.env.INTASEND_PUBLISHABLE_KEY;
 
@@ -30,7 +30,7 @@ export const sendMobileMoney = async (phoneNumber: string, name: string, amount:
     });
 
     //step 2: Approve and release payment
-    return await intasend.payouts().approve(response, false).then((res) => {
+    return await intasend.payouts().approve(response, false).then((res: any) => {
       console.log(res);
       console.log("Payout approved");
       Transaction.create({
@@ -39,10 +39,10 @@ export const sendMobileMoney = async (phoneNumber: string, name: string, amount:
         requestData:response,
         responseData: res,
       });
-    }).catch((err) => {
+    }).catch((err: any) => {
       console.log(err);
     });
-  } catch (err) {
+  } catch (err: any) {
     console.error(`Error sending mobile money payout:`, err);
     console.error(err.toString('ascii'));
   }
@@ -76,7 +76,7 @@ export const requestMpesaPayment = async (firstName: string, lastName: string, e
         responseData: response,
       });
       return response;
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
       console.log(err.toString('ascii'));
       return err;
@@ -100,7 +100,7 @@ export const sendToMpesaPaybill = async (businessName:string, amount: number, pa
     console.log("Paybill B2B response: ");
     console.log(response);
 
-    return await intasend.payouts().approve(response, false).then((res) => {
+    return await intasend.payouts().approve(response, false).then((res: any) => {
       console.log(res);
       console.log("Payout approved");
       Transaction.create({
@@ -111,7 +111,7 @@ export const sendToMpesaPaybill = async (businessName:string, amount: number, pa
       });
     });
 
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     console.log(err.toString('ascii'));
   }
@@ -133,7 +133,7 @@ export const sendToMpesaTillNumber = async (businessName:string, amount: number,
     console.log("Till B2B response: ");
     console.log(response);
 
-    return await intasend.payouts().approve(response, false).then((res) => {
+    return await intasend.payouts().approve(response, false).then((res: any) => {
       console.log(res);
       console.log("Payout approved");
       Transaction.create({
@@ -144,7 +144,7 @@ export const sendToMpesaTillNumber = async (businessName:string, amount: number,
       });
     });
 
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     console.log(err.toString('ascii'));
   }
@@ -155,7 +155,7 @@ export const checkPaymentStatus = async (invoiceId: string) => {
     const response = await intasend.collection().status(invoiceId);
     console.log(response);
     return response;
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     console.log(err.toString('ascii'));
   }
