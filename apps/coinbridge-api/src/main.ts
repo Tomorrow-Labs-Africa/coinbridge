@@ -41,3 +41,5 @@ const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}${SERVER_BASE_PATH}`);
 });
 server.on('error', console.error);
+
+module.exports = app;
