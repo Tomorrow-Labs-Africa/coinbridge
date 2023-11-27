@@ -4,7 +4,6 @@ export class AppElement extends HTMLElement {
   public static observedAttributes = [];
 
   connectedCallback() {
-    const title = 'coinbridge-site';
     this.innerHTML = `
       <!-- ======= Header ======= -->
         <section id="topbar" class="topbar d-flex align-items-center">
