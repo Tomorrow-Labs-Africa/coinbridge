@@ -53,6 +53,12 @@
         "style": "scss",
         "linter": "eslint"
       }
+    },
+    "@nx/web:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "none"
     }
   },
   "nxCloudAccessToken": "MjIxNDVmNDItYWIyZi00NzY0LWJmZjItNGNkOTBkYjM0Nzg4fHJlYWQtd3JpdGU="
