@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Airtime from './Views/Airtime';
+import Menu from './Views/Menu';
 import OffRamp from './Views/OffRamp';
+import OnRamp from './Views/OnRamp';
 import styles from './app.module.scss';
 
 import NxWelcome from './nx-welcome';
@@ -15,6 +17,9 @@ export function App() {
       <div>
         {/* <Airtime/> */}
         <OffRamp/>
+        {/* <OnRamp /> */}
+        {/* <Menu /> */}
+      
 
         {/* <NxWelcome title="coinbridge-web" /> */}
       </div>

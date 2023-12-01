@@ -13,7 +13,7 @@ export const sendMoney = (paymentDetails:any) =>{
             toast('Successful Payment made', {type: "success"});            
         }
     }, (error) => {
-        toast(error.response.data.message, {type: "error"});
+        toast(error, {type: "error"});
     })
 
 }
