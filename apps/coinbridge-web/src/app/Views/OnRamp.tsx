@@ -1,5 +1,12 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import MuiPhoneNumber from "material-ui-phone-number";
+// {
+//     "firstName": "Jeffrey",
+//     "lastName": "Kingori",
+//     "email": "jeffreygithongo@gmail.com",
+//     "phoneNumber":"254710113242",
+//     "amount": 10
+// }
 
 function OnRamp () {
     return (

@@ -3,9 +3,6 @@ import { useMutation } from "react-query"
 import { toast } from "react-toastify"
 import { BASE_URL } from "../constants"
 
-import { MobileMoneyService } from "@coinbridge/transactions";
-
-// TODO fetch constant from .env
 export const sendMoney = (paymentDetails:any) =>{
     return axios.post(`${BASE_URL}/transactions/sendMobileMoney`, paymentDetails)
     .then((response)=>{

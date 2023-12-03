@@ -26,14 +26,12 @@ function OffRamp () {
 
         console.log('This is offramp data ', offRampData)
 
-        sendMoney(offRampData)
-
-    
+        // sendMoney(offRampData)
 
 
         // TODO send money to escrow
         const result = await sendToken('0.0001')
-        toast(result?.status, {type: "success"})
+        toast('success', {type: "success"})
 
         // if(result?.status == 1){
         //     try {
