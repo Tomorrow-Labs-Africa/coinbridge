@@ -11,8 +11,5 @@
       "src": "/(.*)",
       "dest": "/apps/coinbridge-api/src/main.ts"
     }
-  ],
-  "scripts": {
-    "build": "npm install --legacy-peer-deps && npm npx run coinbridge-api:build"
-  }
+  ]
 }
