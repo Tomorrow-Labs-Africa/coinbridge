@@ -7,7 +7,7 @@
     "start-web": "npx nx run coinbridge-web:serve",
     "start-api": "npx nx run coinbridge-api:serve",
     "build-web": "npx nx run coinbridge-web:build",
-    "build": "npm i --legacy-peer-deps && npm npx run coinbridge-api:build"
+    "build": "npm install --legacy-peer-deps && npm npx run coinbridge-api:build"
   },
   "private": true,
   "dependencies": {
