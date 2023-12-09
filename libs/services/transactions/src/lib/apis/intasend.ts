@@ -14,8 +14,6 @@ const intasend = new IntaSend(
   false,
 );
 
-
-
 export const sendMobileMoney = async (phoneNumber: string, name: string, amount: number, narrative: string) => {
   try {
     // Step 1: Initiate M-Pesa B2C
@@ -34,7 +32,7 @@ export const sendMobileMoney = async (phoneNumber: string, name: string, amount:
       console.log(res);
       console.log("Payout approved");
       Transaction.create({
-        status: TransactionStatus.COMPLETE,
+        status: TransactionStatus.Complete,
         type: TransactionTypes.SEND_MOBILE_MONEY,
         requestData:response,
         responseData: res,
@@ -48,7 +46,7 @@ export const sendMobileMoney = async (phoneNumber: string, name: string, amount:
   }
 };
 
-export const requestMpesaPayment = async (firstName: string, lastName: string, email: string, phoneNumber: string, amount: number, host: string = "https://coinbridge.io", apiRef: string = "Collect") => {
+export const requestMpesaPayment = async (firstName: string, lastName: string, email: string, phoneNumber: string, amount: number, host: string = "https://coinbridge.co", apiRef: string = "Collect") => {
   try {
     const response = await intasend.collection().mpesaStkPush({
         first_name: firstName,
@@ -62,7 +60,7 @@ export const requestMpesaPayment = async (firstName: string, lastName: string, e
       console.log(`Mobile money payment request sent to ${firstName} ${lastName} (${phoneNumber}) for ${amount} KES`);
       console.log(`Request response:`, response);
       Transaction.create({
-        status: TransactionStatus.PROCESSING,
+        status: TransactionStatus.Pending,
         type: TransactionTypes.REQUEST_MOBILE_MONEY,
         requestData:{
           firstName,
@@ -104,7 +102,7 @@ export const sendToMpesaPaybill = async (businessName:string, amount: number, pa
       console.log(res);
       console.log("Payout approved");
       Transaction.create({
-        status: TransactionStatus.COMPLETE,
+        status: TransactionStatus.Complete,
         type: TransactionTypes.PAYBILL,
         requestData:response,
         responseData: res,
@@ -137,7 +135,7 @@ export const sendToMpesaTillNumber = async (businessName:string, amount: number,
       console.log(res);
       console.log("Payout approved");
       Transaction.create({
-        status: TransactionStatus.COMPLETE,
+        status: TransactionStatus.Complete,
         type: TransactionTypes.BUY_GOODS,
         requestData:response,
         responseData: res,
@@ -158,5 +156,30 @@ export const checkPaymentStatus = async (invoiceId: string) => {
   } catch (err: any) {
     console.log(err);
     console.log(err.toString('ascii'));
+  }
+}
+
+export const processMobileMoneyCollcetion = async (payload: any) => {
+  console.log(`processing payment for inv id ${payload.invoice_id} with state ${payload.state}`);
+  const transaction = await Transaction.findOne({"responseData.invoice.invoice_id" : payload.invoice_id});
+  if(transaction){
+    //update transaction status
+    switch(payload.state) {
+      case 'COMPLETE':
+        transaction.status = TransactionStatus.Complete;
+        break;
+      case 'PROCESSING':
+        transaction.status = TransactionStatus.Processing;
+        break;
+      case 'FAILED':
+        transaction.status = TransactionStatus.Failed;
+        break;
+      case 'PENDING':
+        transaction.status = TransactionStatus.Pending;
+        break;
+      default:
+        console.log('Unknown transaction state');
+    }
+    transaction.save();
   }
 }
