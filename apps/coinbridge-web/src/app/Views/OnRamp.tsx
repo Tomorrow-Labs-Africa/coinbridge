@@ -2,6 +2,7 @@ import { Box, Button, Container, Grid, TextField, Typography } from "@mui/materi
 import MuiPhoneNumber from "material-ui-phone-number";
 import { useRequestMoney } from "../Services/useRequestMoney";
 import wallet from '../../assets/wallet.svg'
+import { useState } from "react";
 
 // {
 //     "firstName": "Jeffrey",
@@ -12,6 +13,15 @@ import wallet from '../../assets/wallet.svg'
 // }
 
 function OnRamp () {
+
+    const [value, setValue] = useState(0);
+    const rate =154
+    const handleChange = (event:any) => {
+        setValue(event.target.value);
+      };
+
+      const convertedValue = value/rate;
+
 
     const {mutate:requestMoney} = useRequestMoney()
 
@@ -34,6 +44,7 @@ function OnRamp () {
         console.log('onRampData: ', onRampData)
 
         requestMoney(onRampData)
+        // TODO send payment to wallet
     }
 
     return (
@@ -83,8 +94,10 @@ function OnRamp () {
             shrink: true,
             }}
             InputProps={{
-                endAdornment: <div style={{ fontSize: '0.9rem', color: '#999' }}>~10000cUSD</div>,
+                endAdornment: <div style={{ fontSize: '0.9rem', color: '#999' }}>~{convertedValue.toFixed(2)}cUSD</div>,
               }}
+            value={value}
+            onChange={handleChange}
         />
 
 
