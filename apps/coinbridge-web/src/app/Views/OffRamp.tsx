@@ -34,15 +34,14 @@ function OffRamp () {
 
         // TODO replace with string value of amount
         const result = await sendToken('0.0001')
-        // toast('success', {type: "success"})
 
         if(result?.transactionHash){
             try {
                 sendMoney(offRampData)
-                toast(`Your KES ${totalAmount} has successfully been processed`, {type: "success"})
+                toast(`KES ${totalAmount} has successfully been processed`, {type: "success"})
 
             } catch (error) {
-                toast('Failure somewhere', {type: "error"});
+                toast('Oops Something happended, Try Again', {type: "error"});
             }
 
         }
