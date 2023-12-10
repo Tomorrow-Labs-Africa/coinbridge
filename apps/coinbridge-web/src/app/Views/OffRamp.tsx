@@ -31,11 +31,14 @@ function OffRamp () {
             name: data.get('fullName'),
             amount: totalAmount
         }
+        console.log('offRampData: ', offRampData)
+
+
 
         // TODO replace with string value of amount
-        const result = await sendToken('0.0001')
+        const result = await sendToken(totalAmount.toString())
 
-        if(result?.transactionHash){
+        if(result?.hash){
             try {
                 sendMoney(offRampData)
                 toast(`KES ${totalAmount} has successfully been processed`, {type: "success"})

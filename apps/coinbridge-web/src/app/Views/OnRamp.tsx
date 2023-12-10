@@ -44,6 +44,7 @@ function OnRamp () {
         console.log('onRampData: ', onRampData)
 
         requestMoney(onRampData)
+        // TODO send payment to wallet
     }
 
     return (
