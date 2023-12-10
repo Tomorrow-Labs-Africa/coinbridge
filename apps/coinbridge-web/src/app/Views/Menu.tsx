@@ -1,8 +1,14 @@
-import { Box, Button, Card, CardActions, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
 // import { ethers,providers } from "ethers";
 import { useState, useEffect } from 'react';
 // import { CUSD_CONTRACT } from '../constants';
 // import erc20Abi from '../abi/ERC20.json';
+import wallet from '../../assets/wallet.svg'
+import phone from '../../assets/phone.svg'
+import withdraw from '../../assets/withdraw.svg'
+import cash from '../../assets/cash.svg'
+import { Link } from "react-router-dom";
+
 
 
 declare global {
@@ -45,11 +51,10 @@ function Menu () {
 
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%'}}>
             <Container component="main" maxWidth="xs">
-            <Box
+                <Box
                     component="form"
-                    // onSubmit={}
                     sx={{
                     marginTop: 6,
                     display: 'flex',
@@ -57,88 +62,71 @@ function Menu () {
                     alignItems: 'center',
                     }}
                 >
-
-            <Card sx={{ minWidth: 475 }}>
-                <CardContent>
-                    <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
-                    Minipay Balance
-                    </Typography>
-                    <Typography variant="h3" component="div" marginTop={4}>
-                     10 cUSD
-                    </Typography>
-                    {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    adjective
-                    </Typography>
-                    <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                    </Typography> */}
-                </CardContent>
-                {/* <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions> */}
-            </Card>
-
-            <Grid marginTop={4} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
-                <Grid item xs={6} marginBottom={3}>
-                    <Card>
-                        <CardContent>
-                            <Typography fontSize={50} >
-                             💰
+                <Grid container item xs={12} >
+                    <Card sx={{ backgroundColor: '#357074',width:'100%'}}>
+                        <CardContent sx={{margin:1}}>
+                            <Typography sx={{ fontSize: 22, color: '#FFFFFF', fontWeight:400 }} gutterBottom>
+                            MiniPay Balance
                             </Typography>
-                            
-                            <Typography  variant="h6" component="div" marginTop={4}>
-                                Top Up 
+                            <Typography sx={{ color: 'white', fontWeight:500 }} variant="h3" component="div" marginTop={3}>
+                            10 cUSD
                             </Typography>
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={6} marginBottom={3}>
-                    <Card>
-                        <CardContent>
-                            <Typography fontSize={50} >
-                            💸
-                            </Typography>
-                            <Typography  variant="h6" component="div" marginTop={4}>
-                                Withdraw
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card>
-                        <CardContent>
-                            <Typography fontSize={50} >
-                            💵
-                            </Typography>
-                            <Typography  variant="h6" component="div" marginTop={4}>
-                                Pay Bills
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card>
-                        <CardContent>
-                            <Typography fontSize={50} >
-                            📱
-                            </Typography>
-                            <Typography  variant="h6" component="div" marginTop={4}>
-                                SMS Wallet
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
-            
 
-            </Box>
 
-  
 
+                    <Grid marginTop={4} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
+                        <Grid item xs={6} marginBottom={3}>
+
+
+                            <Card>
+                                <Link to="/onramp" style={{ textDecoration: 'none', color:"#000000" }}>
+                                <CardContent sx={{justifyContent:'center', textAlign:'center'}}>
+                                    <img src={wallet} width={40} height={40} alt="logo" />
+                                    <Typography sx={{textAlign:'center'}} variant="h6" component="div" paddingTop={2}>
+                                        Deposit
+                                    </Typography>
+                                </CardContent>
+                                </Link>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={6} marginBottom={3}>
+                            <Card>
+                                <Link to="/offramp" style={{ textDecoration: 'none', color:"#000000" }}>
+                                <CardContent sx={{justifyContent:'center', textAlign:'center'}}>
+                                    <img src={withdraw} width={40} height={40} alt="logo" />
+                                    <Typography sx={{textAlign:'center'}}  variant="h6" component="div" paddingTop={2}>
+                                        Withdraw
+                                    </Typography>
+                                </CardContent>
+                                </Link>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Card>
+                                <CardContent sx={{justifyContent:'center', textAlign:'center'}}>
+                                    <img src={cash} width={40} height={40} alt="logo" />
+                                    <Typography sx={{textAlign:'center'}} variant="h6" component="div" paddingTop={2}>
+                                        Pay Bills
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Card >
+                                <CardContent sx={{justifyContent:'center', textAlign:'center'}}>
+                                    <img src={phone} width={40} height={40} alt="logo" />
+                                    <Typography sx={{textAlign:'center'}} variant="h6" component="div" paddingTop={2}>
+                                        SMS Wallet
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </Box>
             </Container>
-
         </Box>
 
 

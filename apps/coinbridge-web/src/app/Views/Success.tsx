@@ -3,17 +3,12 @@ import { useSendMoney } from "../Services/useSendMoney";
 import MuiPhoneNumber from "material-ui-phone-number";
 import { sendToken } from "../Services/sendToken";
 import { toast } from "react-toastify"
-import withdraw from '../../assets/withdraw.svg'
-
-function OffRamp () {
-
-    const rate = 154
+import succeess from '../../assets/success.svg'
+function Success () {
 
     const {mutate:sendMoney} = useSendMoney()
 
     const offRamp =  async(event:any) =>{
-        toast('success', {type: "success"})
-
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
@@ -30,7 +25,7 @@ function OffRamp () {
 
         // TODO replace with string value of amount
         const result = await sendToken('0.0001')
-        // toast('success', {type: "success"})
+        toast('success', {type: "success"})
 
         if(result?.transactionHash){
             try {
@@ -57,65 +52,32 @@ function OffRamp () {
                 >
                 
                 <Grid container item xs={12} sx={{justifyContent:'center', textAlign:'center'}}>
-                    <img src={withdraw} width={40} height={40} alt="logo" />
+                    <img src={succeess} width={200} height={200} alt="logo" />
                 </Grid>
-                <Typography marginTop={1} marginBottom={3} fontSize={20}>
-                    Withdraw
+
+                <Typography 
+                    marginTop={5}
+                    fontSize={18}
+                    textAlign={"center"}
+                    >
+                    
+                    <strong>20 cUSD</strong> has been deposited into your account
                 </Typography>
 
 
-                <TextField
-                    required
-                    fullWidth
-                    label="Name"
-                    type="text"
-                    margin="normal"
-                    name='fullName'
-                    InputLabelProps={{
-                    shrink: true,
-                }}
-                />
-                <TextField
-                    required
-                    fullWidth
-                    label="USD Amount"
-                    type="number"
-                    name='amount'
-                    margin="normal"
-                    InputLabelProps={{shrink: true}}
-                    InputProps={{
-                        endAdornment: <div style={{ fontSize: '0.9rem', color: '#999' }}>~{}KES</div>,
-                      }}
-                />
-    
-                <MuiPhoneNumber
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    required
-                    defaultCountry={"ke"}
-                    onlyCountries={['ke','gh']}
-                    label="Phone"
-                    name="phone"
-                    autoFocus
-                    sx={{
-                        svg: {
-                        height: "20px",
-                        },
-                    }}
-                    onChange={console.log} />
 
     
             <Button             
                 sx={{
-                    marginTop:4,
+                    marginTop:16,
                     padding:1,
-                    backgroundColor:'#357074'
+                    backgroundColor:'#357074',
                 }}
                 variant="contained"
                 type='submit'
-                fullWidth>
-                Withdraw cUSD
+                fullWidth
+                >
+                Done
             </Button>
     
     
@@ -129,4 +91,4 @@ function OffRamp () {
 
 }
 
-export default OffRamp
+export default Success
