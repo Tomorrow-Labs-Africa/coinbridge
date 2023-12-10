@@ -11,7 +11,4 @@ export const useGetBalance = async (accountAddress:string) => {
     const cUSDBalance = parseFloat(ethers.utils.formatUnits(balance, decimals));
 
     return cUSDBalance;
-
-    
-    
 }

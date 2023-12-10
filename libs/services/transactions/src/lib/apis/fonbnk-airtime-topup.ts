@@ -3,7 +3,8 @@ import * as utf8 from 'utf8';
 import axios from 'axios';
 import * as moment from 'moment';
 
-import dotenv = require('dotenv');
+import * as dotenv from 'dotenv';
+import { Transaction, TransactionTypes } from '@coinbridge/transaction';
 dotenv.config();
 
 const SERVER_URL = `${process.env.FONBNK_BASE_URL}`;
@@ -70,6 +71,12 @@ export async function airtimeTopUp(phone: string, amount: number, carrier?: stri
     .then(res => {
       console.log("========= RESP ==========");
       console.log(res.data);
+      Transaction.create({
+        status: 'COMPLETE',
+        type: TransactionTypes.AIRTIME_TOP_UP,
+        requestData: reqBody,
+        responseData: res.data,
+      });
       return res.data;
     }).catch(err => {
       console.log(err.response.data);

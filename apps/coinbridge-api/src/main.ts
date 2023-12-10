@@ -15,10 +15,20 @@ const app = express();
 
 const SERVER_BASE_PATH = '/api/v1';
 app.use(express.json())  
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // TODO: Change this to the domain of the frontend app
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.use(`${SERVER_BASE_PATH}/transactions`, TransactionRoutes);
 app.use(`${SERVER_BASE_PATH}/auth`, AuthRoutes);
+
+
 
 const port = process.env.PORT || 3333;
 
@@ -41,3 +51,5 @@ const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}${SERVER_BASE_PATH}`);
 });
 server.on('error', console.error);
+
+module.exports = app;

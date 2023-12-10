@@ -1,0 +1,77 @@
+{
+  "name": "coinbridge-site",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/coinbridge-site/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/coinbridge-site",
+        "compiler": "swc",
+        "main": "apps/coinbridge-site/src/main.ts",
+        "tsConfig": "apps/coinbridge-site/tsconfig.app.json",
+        "webpackConfig": "apps/coinbridge-site/webpack.config.js",
+        "assets": [
+          "apps/coinbridge-site/src/favicon.ico",
+          "apps/coinbridge-site/src/assets"
+        ],
+        "index": "apps/coinbridge-site/src/index.html",
+        "baseHref": "/",
+        "styles": ["apps/coinbridge-site/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/coinbridge-site/src/environments/environment.ts",
+              "with": "apps/coinbridge-site/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "options": {
+        "buildTarget": "coinbridge-site:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "coinbridge-site:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/coinbridge-site/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/coinbridge-site/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  }
+}
