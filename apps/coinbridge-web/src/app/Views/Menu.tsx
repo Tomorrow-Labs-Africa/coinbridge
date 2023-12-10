@@ -69,7 +69,7 @@ function Menu () {
                             MiniPay Balance
                             </Typography>
                             <Typography sx={{ color: 'white', fontWeight:500 }} variant="h3" component="div" marginTop={3}>
-                            {balance} cUSD
+                            {balance.toFixed(2)} cUSD
                             </Typography>
                         </CardContent>
                     </Card>

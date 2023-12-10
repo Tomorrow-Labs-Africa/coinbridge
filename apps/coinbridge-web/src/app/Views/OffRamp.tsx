@@ -21,7 +21,7 @@ function OffRamp () {
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
-        const usdToKes = 153;
+        const usdToKes = 154;
         const amount = data?.get('amount');
 
         const totalAmount = amount ? parseFloat(amount.toString())* usdToKes : 0;
