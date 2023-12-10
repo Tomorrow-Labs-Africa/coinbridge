@@ -1,8 +1,8 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
-// import { ethers,providers } from "ethers";
+import { ethers,providers } from "ethers";
 import { useState, useEffect } from 'react';
-// import { CUSD_CONTRACT } from '../constants';
-// import erc20Abi from '../abi/ERC20.json';
+import { CUSD_CONTRACT } from '../constants';
+import erc20Abi from '../abi/ERC20.json';
 import wallet from '../../assets/wallet.svg'
 import phone from '../../assets/phone.svg'
 import withdraw from '../../assets/withdraw.svg'
@@ -22,32 +22,32 @@ function Menu () {
     const [balance, setBalance]=useState(0)
 
 
-    // useEffect(() =>{
+    useEffect(() =>{
 
-    //     async function getBalance() {
-    //       if (window.ethereum && window.ethereum.isMiniPay) {
-    //         const provider = new providers.Web3Provider(window.ethereum);
-    //         // Get the signer (user's account)
-    //         const signer = await provider.getSigner();
-    //         // Get the user's Ethereum address
-    //         const address = await signer.getAddress();
+        async function getBalance() {
+          if (window.ethereum && window.ethereum.isMiniPay) {
+            const provider = new providers.Web3Provider(window.ethereum);
+            // Get the signer (user's account)
+            const signer = await provider.getSigner();
+            // Get the user's Ethereum address
+            const address = await signer.getAddress();
     
-    //         // get cUSD balance
-    //         const contract = new ethers.Contract(CUSD_CONTRACT, erc20Abi, provider);
-    //         const balance = await contract.balanceOf(address);
-    //         const decimals = await contract.decimals();
-    //         const cUSDBalance = parseFloat(ethers.utils.formatUnits(balance, decimals));
+            // get cUSD balance
+            const contract = new ethers.Contract(CUSD_CONTRACT, erc20Abi, provider);
+            const balance = await contract.balanceOf(address);
+            const decimals = await contract.decimals();
+            const cUSDBalance = parseFloat(ethers.utils.formatUnits(balance, decimals));
     
-    //         setBalance(cUSDBalance)
+            setBalance(cUSDBalance)
               
-    //       } else {
-    //           console.error("MiniPay provider not detected");
-    //       }
+          } else {
+              console.error("MiniPay provider not detected");
+          }
           
-    //     }
-    //     getBalance()
+        }
+        getBalance()
     
-    //   }, [balance])
+      }, [balance])
 
 
     return (
@@ -69,7 +69,7 @@ function Menu () {
                             MiniPay Balance
                             </Typography>
                             <Typography sx={{ color: 'white', fontWeight:500 }} variant="h3" component="div" marginTop={3}>
-                            10 cUSD
+                            {balance} cUSD
                             </Typography>
                         </CardContent>
                     </Card>

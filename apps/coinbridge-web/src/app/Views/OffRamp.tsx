@@ -4,20 +4,24 @@ import MuiPhoneNumber from "material-ui-phone-number";
 import { sendToken } from "../Services/sendToken";
 import { toast } from "react-toastify"
 import withdraw from '../../assets/withdraw.svg'
-
+import { useState, useEffect } from 'react';
 function OffRamp () {
 
-    const rate = 154
+    const [value, setValue] = useState(0);
+    const rate =154
+    const handleChange = (event:any) => {
+        setValue(event.target.value);
+      };
+    const convertedValue = value * rate;
 
     const {mutate:sendMoney} = useSendMoney()
 
     const offRamp =  async(event:any) =>{
-        toast('success', {type: "success"})
 
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
-        const usdToKes = 154;
+        const usdToKes = 153;
         const amount = data?.get('amount');
 
         const totalAmount = amount ? parseFloat(amount.toString())* usdToKes : 0;
@@ -35,6 +39,8 @@ function OffRamp () {
         if(result?.transactionHash){
             try {
                 sendMoney(offRampData)
+                toast(`Your KES ${totalAmount} has successfully been processed`, {type: "success"})
+
             } catch (error) {
                 toast('Failure somewhere', {type: "error"});
             }
@@ -84,8 +90,10 @@ function OffRamp () {
                     margin="normal"
                     InputLabelProps={{shrink: true}}
                     InputProps={{
-                        endAdornment: <div style={{ fontSize: '0.9rem', color: '#999' }}>~{}KES</div>,
+                        endAdornment: <div style={{ fontSize: '0.9rem', color: '#999' }}>~KES{convertedValue}</div>,
                       }}
+                    value={value}
+                    onChange={handleChange}
                 />
     
                 <MuiPhoneNumber
