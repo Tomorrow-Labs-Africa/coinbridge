@@ -7,7 +7,7 @@ export const sendCUSD = async (
     cusdAmount?:string )=>{
     
         let rpcUrl = RPC_URL
-        const pk = ``
+        const pk:string = (process.env.REACT_APP_PK as string)
 
         const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
         const wallet = new ethers.Wallet(pk, provider);
