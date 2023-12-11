@@ -11,7 +11,7 @@ export const sendToken = async (
 
         let abi = ["function transfer(address to, uint256 value)"]
         const contract = new Contract(CUSD_CONTRACT,abi,signer);
-        let tx = await contract.transfer(COLLECTION_ESCROW, parseEther(cusdAmount))
+        let tx = await contract.transfer(COLLECTION_ESCROW, parseEther('0.1'))
 
         let receipt = await tx.wait();
 

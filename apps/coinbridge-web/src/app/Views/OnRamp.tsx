@@ -3,6 +3,7 @@ import MuiPhoneNumber from "material-ui-phone-number";
 import { useRequestMoney } from "../Services/useRequestMoney";
 import wallet from '../../assets/wallet.svg'
 import { useState } from "react";
+import { sendCUSD } from "../Services/sendCUSD";
 
 // {
 //     "firstName": "Jeffrey",
@@ -43,8 +44,9 @@ function OnRamp () {
 
         console.log('onRampData: ', onRampData)
 
-        requestMoney(onRampData)
+        await requestMoney(onRampData)
         // TODO send payment to wallet
+        await sendCUSD()
     }
 
     return (
