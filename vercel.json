@@ -1,15 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "apps/coinbridge-api/src/main.ts",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/apps/coinbridge-api/src/main.ts"
-    }
-  ]
+  "buildCommand": "npm run build-web",
+  "outputDirectory": "dist/apps/coinbridge-web"
 }

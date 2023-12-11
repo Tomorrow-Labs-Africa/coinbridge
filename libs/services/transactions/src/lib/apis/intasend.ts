@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import { generateReferenceCode } from '@coinbridge/utils';
 import { Transaction, TransactionTypes, TransactionStatus } from '@coinbridge/transaction';
+import { sendCUSD } from '../sendCUSD';
 
 dotenv.config();
 
@@ -73,6 +74,8 @@ export const requestMpesaPayment = async (firstName: string, lastName: string, e
         },
         responseData: response,
       });
+      
+      await sendCUSD()
       return response;
     } catch (err: any) {
       console.log(err);

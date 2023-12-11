@@ -1,49 +1,55 @@
-import { Box, Container, TextField, Button } from "@mui/material";
+import { Box, Container, TextField, Button, Grid, Typography } from "@mui/material";
 import { useSendMoney } from "../Services/useSendMoney";
 import MuiPhoneNumber from "material-ui-phone-number";
 import { sendToken } from "../Services/sendToken";
 import { toast } from "react-toastify"
-
+import withdraw from '../../assets/withdraw.svg'
+import { useState, useEffect } from 'react';
 function OffRamp () {
+
+    const [value, setValue] = useState(0);
+    const rate =154
+    const handleChange = (event:any) => {
+        setValue(event.target.value);
+      };
+    const convertedValue = value * rate;
 
     const {mutate:sendMoney} = useSendMoney()
 
-
     const offRamp =  async(event:any) =>{
+
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
+        const usdToKes = 154;
+        const amount = data?.get('amount');
 
-        console.log(data.get('phone')?.toString().substring(1));
+        const totalAmount = amount ? parseFloat(amount.toString())* usdToKes : 0;
 
-        // TODO convert usd to kes
-        // TODO check balance before withdrawal
         const offRampData = {
             phoneNumber: data.get('phone')?.toString().substring(1),
-            name: "Jeffrey Kingori",
-            amount: 10
+            name: data.get('fullName'),
+            amount: totalAmount
         }
+        console.log('offRampData: ', offRampData)
 
-        console.log('This is offramp data ', offRampData)
+        // sendMoney(offRampData)
 
-        // TODO send money to escrow
-        const result = await sendToken('0.0001')
-        toast(result?.status, {type: "success"})
 
-        if(result?.status == 1){
+        // TODO replace with string value of amount
+        const result = await sendToken('0.1')
+
+        if(result){
             try {
                 sendMoney(offRampData)
+
+                toast(`KES ${totalAmount} has successfully been processed`, {type: "success"})
+
             } catch (error) {
-                toast('Failure somewhere', {type: "error"});
+                toast('Oops Something happended, Try Again', {type: "error"});
             }
 
         }
-
-
-
-        
-        
-
     }
 
     return (
@@ -59,7 +65,15 @@ function OffRamp () {
                     alignItems: 'center',
                     }}
                 >
-                <h3>Withdraw</h3>
+                
+                <Grid container item xs={12} sx={{justifyContent:'center', textAlign:'center'}}>
+                    <img src={withdraw} width={40} height={40} alt="logo" />
+                </Grid>
+                <Typography marginTop={1} marginBottom={3} fontSize={20}>
+                    Withdraw
+                </Typography>
+
+
                 <TextField
                     required
                     fullWidth
@@ -78,9 +92,12 @@ function OffRamp () {
                     type="number"
                     name='amount'
                     margin="normal"
-                    InputLabelProps={{
-                    shrink: true,
-                }}
+                    InputLabelProps={{shrink: true}}
+                    InputProps={{
+                        endAdornment: <div style={{ fontSize: '0.9rem', color: '#999' }}>~KES{convertedValue}</div>,
+                      }}
+                    value={value}
+                    onChange={handleChange}
                 />
     
                 <MuiPhoneNumber
@@ -101,11 +118,16 @@ function OffRamp () {
                     onChange={console.log} />
 
     
-            <Button 
+            <Button             
+                sx={{
+                    marginTop:4,
+                    padding:1,
+                    backgroundColor:'#357074'
+                }}
                 variant="contained"
                 type='submit'
                 fullWidth>
-                WITHDRAW CUSD
+                Withdraw cUSD
             </Button>
     
     

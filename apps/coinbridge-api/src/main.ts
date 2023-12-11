@@ -28,6 +28,8 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(`${SERVER_BASE_PATH}/transactions`, TransactionRoutes);
 app.use(`${SERVER_BASE_PATH}/auth`, AuthRoutes);
 
+
+
 const port = process.env.PORT || 3333;
 
 dotenv.config();

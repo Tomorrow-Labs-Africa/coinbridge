@@ -43,3 +43,5 @@ Thumbs.db
 apps/coinbridge-web/src/environments
 .env
 .vercel
+
+apps/coinbridge-site/src/environments

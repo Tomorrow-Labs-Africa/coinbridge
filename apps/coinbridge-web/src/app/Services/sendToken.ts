@@ -4,14 +4,14 @@ import { parseEther } from "ethers/lib/utils";
 import { COLLECTION_ESCROW, CUSD_CONTRACT } from "../constants"
 
 export const sendToken = async (
-    cusdAmount?:string )=>{
+    cusdAmount:string )=>{
     if (window.ethereum && window.ethereum.isMiniPay) {
         const provider = new providers.Web3Provider(window.ethereum);
         const signer = await provider.getSigner();
 
         let abi = ["function transfer(address to, uint256 value)"]
         const contract = new Contract(CUSD_CONTRACT,abi,signer);
-        let tx = await contract.transfer(COLLECTION_ESCROW, parseEther('0.001'))
+        let tx = await contract.transfer(COLLECTION_ESCROW, parseEther('0.1'))
 
         let receipt = await tx.wait();
 
