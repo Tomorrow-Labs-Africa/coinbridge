@@ -39,7 +39,7 @@ function OffRamp () {
         // TODO replace with string value of amount
         const result = await sendToken('0.1')
 
-        if(result?.hash){
+        if(result){
             try {
                 sendMoney(offRampData)
 
