@@ -46,7 +46,6 @@ function OnRamp () {
 
         await requestMoney(onRampData)
         // TODO send payment to wallet
-        await sendCUSD()
     }
 
     return (

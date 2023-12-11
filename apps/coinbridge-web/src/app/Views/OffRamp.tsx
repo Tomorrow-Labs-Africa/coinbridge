@@ -44,7 +44,6 @@ function OffRamp () {
                 sendMoney(offRampData)
 
                 toast(`KES ${totalAmount} has successfully been processed`, {type: "success"})
-                toast(`Hash ${result?.txHash} here`, {type: "success"})
 
             } catch (error) {
                 toast('Oops Something happended, Try Again', {type: "error"});
