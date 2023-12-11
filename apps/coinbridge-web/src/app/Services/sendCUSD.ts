@@ -1,27 +1,30 @@
-import { providers, Contract } from "ethers";
+import { providers, Contract, ethers } from "ethers";
 import { parseEther } from "ethers/lib/utils";
-import { COLLECTION_ESCROW, CUSD_CONTRACT } from "../constants"
+import { COLLECTION_ESCROW, CUSD_CONTRACT, RPC_URL } from "../constants"
 
-export const sendToken = async (
+
+export const sendCUSD = async (
     cusdAmount?:string )=>{
-    if (window.ethereum && window.ethereum.isMiniPay) {
-        const provider = new providers.Web3Provider(window.ethereum);
-        const signer = await provider.getSigner();
+    
+        let rpcUrl = RPC_URL
+        const pk = ``
 
-        const accountAddress = await signer.getAddress()
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+        const wallet = new ethers.Wallet(pk, provider);
+        const gasPrice  = await (await provider.getFeeData()).gasPrice;
+        const nonce = await provider.getTransactionCount(wallet.getAddress());
+  
+        // TODO make this dynamic
+        const result = await wallet.sendTransaction({
+            to: '0xb5B00313da3aA8F6463228DBFD6A23740Ca291a1',
+            value: ethers.utils.parseEther('0.1'),
+            gasPrice:  gasPrice!,
+            nonce: nonce,
+        })
 
-        let abi = ["function transfer(address to, uint256 value)"]
-        const contract = new Contract(CUSD_CONTRACT,abi,signer);
-        let tx = await contract.transfer(COLLECTION_ESCROW, parseEther('0.001'))
+        console.log('result: ', result)
 
-        let receipt = await tx.wait();
-
-        console.log('Receipt is: ', receipt)
-        return receipt
-
-    } else {
-        console.error("MiniPay provider not detected");
-    }
+        return result
 
 
 }
