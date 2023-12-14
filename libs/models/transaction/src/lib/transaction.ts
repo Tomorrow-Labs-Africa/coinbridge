@@ -4,7 +4,7 @@ import { TransactionTypes } from "./enums/transaction-types.enum";
 const transactionSchema = new Schema({
     status: {
         required: true,
-        type: String
+        type: String,
     },
     createdAt: {
       type: Date,

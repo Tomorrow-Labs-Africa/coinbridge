@@ -13,6 +13,11 @@ class TransactionController {
     res.status(200).json({ status: true, data: response });
   }
 
+  public static processMobileMoneyCollcetion(req: Request, res: Response): void {
+    let response = MobileMoneyService.processMobileMoneyCollcetion(req.body);
+    res.status(200).json({ status: true, data: response });
+  }
+
   public static buyAirtime(req: Request, res: Response): void {
     let response = AirtimeService.buyAirtime(req.body.phoneNumber, req.body.amount);
     res.status(200).json({ status: true, data: response });

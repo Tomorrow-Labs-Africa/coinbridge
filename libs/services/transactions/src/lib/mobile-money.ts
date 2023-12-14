@@ -1,4 +1,4 @@
-import { sendMobileMoney, requestMpesaPayment } from "./apis/intasend";
+import { sendMobileMoney, requestMpesaPayment, processMobileMoneyCollcetion } from "./apis/intasend";
 
 const DEFAULT_PROVIDER = 'INTASEND';
 
@@ -25,7 +25,7 @@ export class MobileMoneyService {
         throw new Error(`Unsupported mobile money service: ${service}`);
     }
 
-    //TODO: Save transaction to DB
+    //TODO: Refactor, move transaction saving api file to here
 
 
   }
@@ -51,5 +51,21 @@ export class MobileMoneyService {
 
     //TODO: Save transaction to DB
 
+  }
+
+  /**
+   * 
+   * @param payload request payload
+   * 
+   */
+  public static processMobileMoneyCollcetion(payload: any): void {
+    switch (payload.host) {
+      case 'https://intasend.com':
+        console.log('Processing Intasend payment');
+        processMobileMoneyCollcetion(payload);
+        break;
+      default:
+        processMobileMoneyCollcetion(payload);
+    }
   }
 }

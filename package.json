@@ -6,7 +6,9 @@
     "start-ussd": "npx nx run coinbridge-ussd:serve",
     "start-web": "npx nx run coinbridge-web:serve",
     "start-api": "npx nx run coinbridge-api:serve",
+    "start-api-prod": "npx nx run coinbridge-api:serve:production",
     "build-web": "npx nx run coinbridge-web:build",
+    "build-api": "npx nx run coinbridge-api:build",
     "build-site": "npx nx build coinbridge-site"
   },
   "private": true,

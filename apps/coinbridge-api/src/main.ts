@@ -14,7 +14,7 @@ import AuthRoutes from './routes/auth.route';
 const app = express();
 
 const SERVER_BASE_PATH = '/api/v1';
-app.use(express.json())  
+app.use(express.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); // TODO: Change this to the domain of the frontend app
