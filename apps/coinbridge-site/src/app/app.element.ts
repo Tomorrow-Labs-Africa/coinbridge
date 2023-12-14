@@ -46,7 +46,7 @@ export class AppElement extends HTMLElement {
             <div class="row gy-5" data-aos="fade-in">
               <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
                 <h2>Welcome to <span>CoinBridge</span></h2>
-                <p>Secure on-ramp and off-rramp infrastructure for Africa.</p>
+                <p>Secure on-ramp and off-ramp infrastructure for Africa.</p>
                 <div class="d-flex justify-content-center justify-content-lg-start">
                   <a href="#call-to-action" class="btn-get-started">Get Started</a>
                   <!-- <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
