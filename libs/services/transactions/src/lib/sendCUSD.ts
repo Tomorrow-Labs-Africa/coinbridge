@@ -14,7 +14,7 @@ export const sendCUSD = async (cusdAmount?: string) => {
   let abi = ['function transfer(address to, uint256 value)'];
   const contract = new Contract(CUSD_CONTRACT, abi, wallet);
   let tx = await contract.transfer(
-    '0xb5B00313da3aA8F6463228DBFD6A23740Ca291a1',
+    '0xa18186c30e0bceca6d5ee8d0180949a969a03714',
     parseEther('0.1')
   );
 
